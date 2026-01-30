@@ -5,22 +5,23 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LearningSpringBootApplication implements CommandLineRunner {
+public class LearningSpringBootApplication{
 
 	public static void main(String[] args) {
 
 		SpringApplication.run(LearningSpringBootApplication.class, args);
 	}
 
-	private final PaymentService paymentService;
+//	private final PaymentService paymentService;
+//
+//	public LearningSpringBootApplication(PaymentService paymentService) {
+//		this.paymentService = paymentService;
+//	}
 
-	public LearningSpringBootApplication( PaymentService paymentService) {
-		this.paymentService = paymentService;
-	}
+//	@Override
+//	public void run(String... args) throws Exception {
+//		String payment = paymentService.pay();
+//		System.out.println("Payment done: "+payment);
+//	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		String payment = paymentService.pay();
-		System.out.println("Payment done: "+payment);
-	}
 }
