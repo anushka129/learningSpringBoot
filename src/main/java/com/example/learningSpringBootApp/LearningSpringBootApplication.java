@@ -12,7 +12,11 @@ public class LearningSpringBootApplication implements CommandLineRunner {
 		SpringApplication.run(LearningSpringBootApplication.class, args);
 	}
 
-	private PaymentService paymentService = new PaymentService();
+	private final PaymentService paymentService;
+
+	public LearningSpringBootApplication( PaymentService paymentService) {
+		this.paymentService = paymentService;
+	}
 
 	@Override
 	public void run(String... args) throws Exception {
