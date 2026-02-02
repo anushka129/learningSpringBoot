@@ -1,19 +1,54 @@
 package com.example.learningSpringBootApp.controller;
 
+import com.example.learningSpringBootApp.dto.AddStudentRequestDto;
 import com.example.learningSpringBootApp.dto.StudentDto;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.learningSpringBootApp.service.StudentService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @RestController
+@RequiredArgsConstructor
+@RequestMapping("/students")
 public class StudentController {
 
-    @GetMapping("/student")
-    public StudentDto getStudent() {
-        return new StudentDto(9L, "Anushka", "anushka@gmail.com");
+    private final StudentService studentService;
+
+    @GetMapping
+    public ResponseEntity<List<StudentDto>> getAllStudent() {
+        //return ResponseEntity.status(HttpStatus.OK).body(studentService.getAllStudents());
+        return ResponseEntity.ok(studentService.getAllStudents());
     }
 
-    @GetMapping("/student/{id}")
-    public StudentDto getStudentById() {
-        return new StudentDto(9L, "Anushka", "anushka@gmail.com");
+    @GetMapping("/{id}")
+    public ResponseEntity<StudentDto> getStudentById(@PathVariable Long id) {
+        return ResponseEntity.ok(studentService.getStudentById(id));
     }
+
+    @PostMapping
+    public ResponseEntity<StudentDto> createNewStudent(@RequestBody AddStudentRequestDto addStudentRequestDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createNewStudent(addStudentRequestDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAStudent(@PathVariable Long id){
+        studentService.deleteStudentById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<StudentDto> updateStudent(@PathVariable Long id, @RequestBody AddStudentRequestDto addStudentRequestDto){
+        return ResponseEntity.ok(studentService.updateStudent(id, addStudentRequestDto));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<StudentDto> updatePartialStudent(@PathVariable Long id, @RequestBody Map<String, Object> updates){
+        return ResponseEntity.ok(studentService.updatePartialStudent(id, updates));
+    }
+
 }

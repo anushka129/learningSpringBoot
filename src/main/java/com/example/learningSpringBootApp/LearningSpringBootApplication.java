@@ -12,16 +12,4 @@ public class LearningSpringBootApplication{
 		SpringApplication.run(LearningSpringBootApplication.class, args);
 	}
 
-//	private final PaymentService paymentService;
-//
-//	public LearningSpringBootApplication(PaymentService paymentService) {
-//		this.paymentService = paymentService;
-//	}
-
-//	@Override
-//	public void run(String... args) throws Exception {
-//		String payment = paymentService.pay();
-//		System.out.println("Payment done: "+payment);
-//	}
-
 }
